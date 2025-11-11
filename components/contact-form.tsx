@@ -3,128 +3,114 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { ArrowRight } from "lucide-react"
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     email: "",
     company: "",
     industry: "",
-    projectType: [],
+    projectType: "",
     message: "",
-    contactMethod: "email",
+    source: "",
+    contact: "email",
     phone: "",
-    heardAboutUs: "",
-    agreeToContact: false,
+    agree: false,
   })
-
-  const [submitted, setSubmitted] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target
-    if (type === "checkbox") {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: (e.target as HTMLInputElement).checked,
-      }))
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }))
-    }
-  }
-
-  const handleProjectTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = e.target
+    const checked = (e.target as HTMLInputElement).checked
     setFormData((prev) => ({
       ...prev,
-      projectType: checked ? [...prev.projectType, value] : prev.projectType.filter((item) => item !== value),
+      [name]: type === "checkbox" ? checked : value,
     }))
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Form data:", formData)
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 3000)
+    console.log("Form submitted:", formData)
+    // Here you would typically send the data to a server
+    alert("Thank you for reaching out! We'll be in touch soon.")
     setFormData({
-      fullName: "",
+      name: "",
       email: "",
       company: "",
       industry: "",
-      projectType: [],
+      projectType: "",
       message: "",
-      contactMethod: "email",
+      source: "",
+      contact: "email",
       phone: "",
-      heardAboutUs: "",
-      agreeToContact: false,
+      agree: false,
     })
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Name */}
       <div>
-        <Label htmlFor="fullName" className="block text-sm font-medium mb-2">
+        <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
           Full Name *
-        </Label>
-        <Input
-          id="fullName"
-          name="fullName"
+        </label>
+        <input
           type="text"
-          required
-          value={formData.fullName}
+          id="name"
+          name="name"
+          value={formData.name}
           onChange={handleChange}
-          className="w-full"
-          placeholder="John Doe"
+          required
+          className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF0066] bg-background text-foreground"
+          placeholder="Your name"
         />
       </div>
 
+      {/* Email */}
       <div>
-        <Label htmlFor="email" className="block text-sm font-medium mb-2">
+        <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
           Email Address *
-        </Label>
-        <Input
+        </label>
+        <input
+          type="email"
           id="email"
           name="email"
-          type="email"
-          required
           value={formData.email}
           onChange={handleChange}
-          className="w-full"
-          placeholder="john@example.com"
+          required
+          className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF0066] bg-background text-foreground"
+          placeholder="you@company.com"
         />
       </div>
 
+      {/* Company */}
       <div>
-        <Label htmlFor="company" className="block text-sm font-medium mb-2">
+        <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2">
           Company Name *
-        </Label>
-        <Input
+        </label>
+        <input
+          type="text"
           id="company"
           name="company"
-          type="text"
-          required
           value={formData.company}
           onChange={handleChange}
-          className="w-full"
-          placeholder="Your Company"
+          required
+          className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF0066] bg-background text-foreground"
+          placeholder="Your company"
         />
       </div>
 
+      {/* Industry */}
       <div>
-        <Label htmlFor="industry" className="block text-sm font-medium mb-2">
+        <label htmlFor="industry" className="block text-sm font-medium text-foreground mb-2">
           Industry
-        </Label>
+        </label>
         <select
           id="industry"
           name="industry"
           value={formData.industry}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground"
+          className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF0066] bg-background text-foreground"
         >
           <option value="">Select an industry</option>
           <option value="finance">Finance</option>
@@ -132,62 +118,63 @@ export default function ContactForm() {
           <option value="retail">Retail</option>
           <option value="manufacturing">Manufacturing</option>
           <option value="saas">SaaS</option>
-          <option value="government">Government</option>
+          <option value="public">Public Sector</option>
           <option value="other">Other</option>
         </select>
       </div>
 
+      {/* Project Type */}
       <div>
-        <Label className="block text-sm font-medium mb-3">Project Type</Label>
-        <div className="space-y-2">
-          {["GenAI/LLM", "ML/AI Strategy", "Cloud Engineering", "MLOps", "Data Engineering", "Consultation"].map(
-            (type) => (
-              <div key={type} className="flex items-center">
-                <input
-                  type="checkbox"
-                  id={type}
-                  value={type}
-                  checked={formData.projectType.includes(type)}
-                  onChange={handleProjectTypeChange}
-                  className="w-4 h-4 rounded border-border"
-                />
-                <label htmlFor={type} className="ml-2 text-sm">
-                  {type}
-                </label>
-              </div>
-            ),
-          )}
-        </div>
+        <label htmlFor="projectType" className="block text-sm font-medium text-foreground mb-2">
+          Project Type
+        </label>
+        <select
+          id="projectType"
+          name="projectType"
+          value={formData.projectType}
+          onChange={handleChange}
+          className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF0066] bg-background text-foreground"
+        >
+          <option value="">Select project type</option>
+          <option value="ai">AI/LLM Development</option>
+          <option value="cloud">Cloud Engineering</option>
+          <option value="data">Data Science</option>
+          <option value="quantum">Quantum Computing</option>
+          <option value="consultation">Consultation</option>
+          <option value="other">Other</option>
+        </select>
       </div>
 
+      {/* Message */}
       <div>
-        <Label htmlFor="message" className="block text-sm font-medium mb-2">
-          Message / Project Brief *
-        </Label>
+        <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+          Message *
+        </label>
         <textarea
           id="message"
           name="message"
-          required
           value={formData.message}
           onChange={handleChange}
+          required
           rows={5}
-          className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground"
-          placeholder="Tell us about your project or question..."
+          className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF0066] bg-background text-foreground"
+          placeholder="Tell us about your project or inquiry..."
         />
       </div>
 
+      {/* How did you hear */}
       <div>
-        <Label htmlFor="heardAboutUs" className="block text-sm font-medium mb-2">
+        <label htmlFor="source" className="block text-sm font-medium text-foreground mb-2">
           How did you hear about us?
-        </Label>
+        </label>
         <select
-          id="heardAboutUs"
-          name="heardAboutUs"
-          value={formData.heardAboutUs}
+          id="source"
+          name="source"
+          value={formData.source}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground"
+          className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF0066] bg-background text-foreground"
         >
-          <option value="">Select...</option>
+          <option value="">Select an option</option>
           <option value="search">Search</option>
           <option value="referral">Referral</option>
           <option value="linkedin">LinkedIn</option>
@@ -197,75 +184,76 @@ export default function ContactForm() {
         </select>
       </div>
 
+      {/* Contact Method */}
       <div>
-        <Label className="block text-sm font-medium mb-3">Preferred Contact Method</Label>
-        <div className="space-y-2">
-          <div className="flex items-center">
+        <label className="block text-sm font-medium text-foreground mb-2">Preferred Contact Method</label>
+        <div className="flex gap-4">
+          <label className="flex items-center gap-2">
             <input
               type="radio"
-              id="email-contact"
-              name="contactMethod"
+              name="contact"
               value="email"
-              checked={formData.contactMethod === "email"}
+              checked={formData.contact === "email"}
               onChange={handleChange}
               className="w-4 h-4"
             />
-            <label htmlFor="email-contact" className="ml-2 text-sm">
-              Email
-            </label>
-          </div>
-          <div className="flex items-center">
+            <span className="text-sm text-foreground">Email</span>
+          </label>
+          <label className="flex items-center gap-2">
             <input
               type="radio"
-              id="phone-contact"
-              name="contactMethod"
+              name="contact"
               value="phone"
-              checked={formData.contactMethod === "phone"}
+              checked={formData.contact === "phone"}
               onChange={handleChange}
               className="w-4 h-4"
             />
-            <label htmlFor="phone-contact" className="ml-2 text-sm">
-              Phone
-            </label>
-          </div>
+            <span className="text-sm text-foreground">Phone</span>
+          </label>
         </div>
       </div>
 
-      {formData.contactMethod === "phone" && (
+      {/* Phone (conditional) */}
+      {formData.contact === "phone" && (
         <div>
-          <Label htmlFor="phone" className="block text-sm font-medium mb-2">
+          <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
             Phone Number
-          </Label>
-          <Input
+          </label>
+          <input
+            type="tel"
             id="phone"
             name="phone"
-            type="tel"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full"
-            placeholder="+1 (234) 567-890"
+            className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF0066] bg-background text-foreground"
+            placeholder="+1 (555) 123-4567"
           />
         </div>
       )}
 
-      <div className="flex items-center">
+      {/* Agreement */}
+      <label className="flex items-start gap-2">
         <input
           type="checkbox"
-          id="agreeToContact"
-          name="agreeToContact"
-          checked={formData.agreeToContact}
+          name="agree"
+          checked={formData.agree}
           onChange={handleChange}
           required
-          className="w-4 h-4 rounded border-border"
+          className="w-4 h-4 mt-1"
         />
-        <label htmlFor="agreeToContact" className="ml-2 text-sm">
-          I agree to receive communications from AI Services
-        </label>
-      </div>
+        <span className="text-sm text-muted">
+          I agree to receive communications from Danalitic regarding my inquiry and future updates.
+        </span>
+      </label>
 
-      <Button type="submit" className="w-full bg-primary text-primary-foreground hover:opacity-90" size="lg">
-        {submitted ? "Message Sent!" : "Send Message"}
-      </Button>
+      {/* Submit */}
+      <button
+        type="submit"
+        className="w-full px-6 py-3 gradient-brand text-white rounded-lg font-medium hover:shadow-lg hover:shadow-pink-300 transition-all duration-300 flex items-center justify-center gap-2 group"
+      >
+        Send Message
+        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+      </button>
     </form>
   )
 }

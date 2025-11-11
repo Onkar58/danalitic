@@ -188,6 +188,29 @@ export default function Hero() {
             </div>
           </div>
         </div>
+
+        {/* Trust Badges */}
+        <div className="mt-20 pt-16 border-t border-slate-200">
+          <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-6">
+            Trusted by Innovators
+          </p>
+          <div className="flex flex-wrap gap-8 items-center">
+            {[
+              "AWS Partner",
+              "Google Cloud Certified",
+              "Microsoft Azure Specialist",
+              "ISO 27001 | SOC 2",
+            ].map((badge) => (
+              <div
+                key={badge}
+                className="flex items-center gap-2 text-sm font-medium text-slate-900 hover:scale-105 transition-transform cursor-pointer"
+              >
+                <div className="w-2 h-2 rounded-full bg-gradient-to-r from-pink-600 to-rose-500" />
+                {badge}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

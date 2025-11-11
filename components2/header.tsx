@@ -1,24 +1,25 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50  backdrop-blur-lg">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-md">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
         <Link
           href="/"
-          className="font-heading font-bold text-xl text-foreground flex items-center gap-2 w-38"
+          className="font-heading font-bold text-xl text-foreground flex items-center gap-2"
         >
-          <img src="logo.png" alt="Logo" />
+          <div className="w-8 h-8 rounded-lg gradient-brand" />
+          <span className="hidden sm:inline">Danalitic</span>
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-8 py-2 font-[600]">
+        <div className="hidden md:flex items-center gap-8">
           <Link
             href="/about"
             className="text-muted hover:text-foreground transition"
