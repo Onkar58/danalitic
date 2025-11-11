@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 import {
   Zap,
@@ -15,7 +14,7 @@ import {
 
 export default function TechSections() {
   const [activeProduct, setActiveProduct] = useState(0);
-  const [hoveredIndustry, setHoveredIndustry] = useState(null);
+  const [hoveredIndustry, setHoveredIndustry] = useState<null | number>(null);
 
   const products = [
     {
@@ -317,7 +316,7 @@ export default function TechSections() {
                             : ""
                         }`}
                       >
-                        {industry.icon}
+                        <industry.icon />
                       </div>
                       <div className="flex-1">
                         <h3 className="text-xl font-heading font-bold text-foreground mb-1">
