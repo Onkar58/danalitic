@@ -14,6 +14,7 @@ import {
   GitBranch,
   Container,
 } from "lucide-react";
+import Link from "next/link";
 
 export const CTA = () => {
   const leftIcons = [
@@ -161,33 +162,35 @@ export const CTA = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="relative z-10 mt-8 flex justify-center lg:mt-16"
         >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all bg-primary text-primary-foreground hover:opacity-90 h-12 rounded-lg px-8 shadow-lg hover:shadow-xl"
-          >
-            Schedule a Strategy Call
-            <motion.svg
-              animate={{ x: [0, 5, 0] }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+          <Link href="contact">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all hover:opacity-90 h-12 rounded-lg px-8 shadow-lg hover:shadow-xl gradient-button"
             >
-              <path d="M5 12h14"></path>
-              <path d="m12 5 7 7-7 7"></path>
-            </motion.svg>
-          </motion.button>
+              Schedule a Strategy Call
+              <motion.svg
+                animate={{ x: [0, 5, 0] }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </motion.svg>
+            </motion.button>
+          </Link>
         </motion.div>
 
         {/* Floating Icons Background */}

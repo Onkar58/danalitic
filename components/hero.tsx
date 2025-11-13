@@ -1,22 +1,16 @@
 "use client";
 
-import React from "react";
 import {
   ArrowRight,
-  Zap,
   Brain,
   Cloud,
-  Workflow,
-  Atom,
-  Play,
-  Plus,
   Signal,
+  Zap,
   AudioLines,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function Hero() {
-  const [isHovered, setIsHovered] = React.useState(null);
-
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-slate-50 via-white to-pink-50 overflow-hidden">
       {/* Animated background blobs */}
@@ -40,14 +34,11 @@ export default function Hero() {
 
             {/* Main Headline */}
             <div>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-slate-900">
-                Crafting{" "}
-                <span className="bg-gradient-to-r from-pink-600 via-rose-500 to-orange-500 bg-clip-text text-transparent">
-                  Intelligent
-                </span>{" "}
-                AI Platforms
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                Crafting <span className="gradient-text">Intelligent</span> AI
+                Platforms
               </h1>
-              <p className="mt-6 text-lg text-slate-600 leading-relaxed max-w-lg">
+              <p className="mt-6 text-lg leading-relaxed max-w-lg">
                 At Danalitic, we fuse Artificial Intelligence, Cloud
                 Engineering, and Quantum Innovation to transform data into
                 decision-making power. From LLMs to Agentic AI, we build
@@ -57,51 +48,18 @@ export default function Hero() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="group relative px-8 py-4 bg-gradient-to-r from-pink-600 to-rose-500 text-white rounded-full font-bold overflow-hidden transition-all hover:shadow-xl hover:shadow-pink-500/30">
-                <span className="relative z-10 flex items-center justify-center gap-2">
+              <button className="group relative px-8 py-4 gradient-button rounded-full font-bold overflow-hidden transition-all hover:shadow-xl hover:shadow-pink-500/30">
+                <Link
+                  href="/solutions"
+                  className="relative z-10 flex items-center justify-center gap-2"
+                >
                   Explore Our Solutions
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
+                </Link>
               </button>
               <button className="px-8 py-4 bg-slate-100 text-slate-900 rounded-full font-bold hover:bg-slate-200 transition-all">
-                Talk to an Expert
+                <Link href="contact">Talk to an Expert</Link>
               </button>
-            </div>
-
-            {/* Stats with User Avatars */}
-            <div className="pt-8 border-t border-slate-200">
-              <div className="flex items-center justify-between">
-                {/* User Stats */}
-                <div>
-                  <div className="flex -space-x-3 mb-3">
-                    {[1, 2, 3].map((i) => (
-                      <div
-                        key={i}
-                        className="w-12 h-12 rounded-full border-2 border-white bg-gradient-to-br from-pink-400 to-rose-500"
-                      />
-                    ))}
-                    <div className="w-12 h-12 rounded-full border-2 border-white bg-white flex items-center justify-center">
-                      <Plus className="w-4 h-4 text-slate-900" />
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="text-4xl font-bold text-slate-900">50+</div>
-                    <div className="text-sm text-slate-600 max-w-[120px] leading-tight">
-                      Production Systems
-                    </div>
-                  </div>
-                </div>
-
-                {/* Video Button */}
-                <div className="border-l border-slate-200 pl-8">
-                  <button className="group w-14 h-14 rounded-full border-2 border-pink-600 bg-white hover:scale-110 transition-transform flex items-center justify-center">
-                    <Play className="w-4 h-4 text-pink-600 fill-pink-600" />
-                  </button>
-                  <p className="mt-3 text-sm text-slate-600 max-w-[100px] leading-tight">
-                    Watch promo video
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
 

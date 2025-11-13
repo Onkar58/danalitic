@@ -28,9 +28,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ scrollBehavior: "smooth" }}>
       <body
-        className={`${_inter.variable} ${_poppins.variable} ${_spaceGrotesk.variable} font-sans antialiased bg-background text-foreground`}
+        className={`${_inter.variable} ${_poppins.variable} ${_spaceGrotesk.variable} font-sans antialiased bg-background text-foreground scroll-smooth`}
       >
         <Header />
         {children}

@@ -149,6 +149,18 @@
     @apply backdrop-blur-md bg-white/40 border border-white/60 shadow-sm;
   }
 
+  .gradient-button {
+    background: linear-gradient(to right, #ff0066, #ff8844, #ffbb33);
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    transition: background-position 700ms ease-out;
+    color: #fff;
+    cursor: pointer;
+  }
+  .gradient-button:hover {
+    background-position: 100% 100%;
+  }
+
   .gradient-mesh {
     background:
       radial-gradient(

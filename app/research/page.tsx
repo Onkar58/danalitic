@@ -1,162 +1,287 @@
-import { BookOpen, Lightbulb, Users } from "lucide-react";
+"use client";
 
-export default function Research() {
+import React from "react";
+import { motion } from "framer-motion";
+import { Cpu, Users, Globe, Award, Zap, BookOpen } from "lucide-react";
+
+/**
+ * Research page for Danalitic AI Labs — Light Mode Version
+ * - Next.js App Router friendly
+ * - Tailwind classes, built for the provided light mode globals.css
+ * - Framer Motion for subtle motion
+ */
+
+const researchItems = [
+  {
+    id: "rag",
+    title: "RAG Performance",
+    subtitle: "Retrieval-augmented generation experiments",
+    desc: "Benchmarks, retrieval strategies, and cost/latency trade-offs for LLM RAG pipelines.",
+    icon: BookOpen,
+  },
+  {
+    id: "agents",
+    title: "Agent Orchestration",
+    subtitle: "Multi-agent workflows & safety",
+    desc: "Design patterns, failure modes, and reward shaping for agentic AI systems.",
+    icon: Users,
+  },
+  {
+    id: "qml",
+    title: "Quantum ML",
+    subtitle: "Quantum-inspired & hybrid models",
+    desc: "Prototyping QML algorithms, simulator experiments and classical-quantum hybrids.",
+    icon: Cpu,
+  },
+  {
+    id: "open",
+    title: "Open Research",
+    subtitle: "Papers & Reproducibility",
+    desc: "Publication-ready artifacts, reproducible notebooks and community datasets.",
+    icon: Globe,
+  },
+];
+
+const container = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+export default function ResearchPage() {
   return (
-    <>
-      <main className="min-h-screen pt-20">
-        {/* Hero */}
-        <section className="relative min-h-96 flex items-center overflow-hidden">
-          <div className="absolute inset-0 gradient-mesh pointer-events-none" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-purple-200 opacity-3 blur-3xl" />
-
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20">
-            <h1 className="text-5xl md:text-6xl font-heading font-bold text-balance mb-6">
-              Innovation at the{" "}
-              <span className="gradient-text">Edge of Intelligence</span>
-            </h1>
-            <p className="text-xl text-muted max-w-2xl">
-              Danalitic AI Labs advances LLMs, Agentic AI, and Quantum-Enhanced
-              Intelligence through cutting-edge research and community
-              collaboration.
+    <main className="min-h-screen overflow-hidden bg-background text-foreground gradient-mesh scroll-smooth">
+      {/* HERO */}
+      <section className="container mx-auto px-6 lg:px-12 py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <motion.header
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="lg:col-span-7"
+          >
+            <p className="inline-flex items-center uppercase text-sm tracking-wider text-muted">
+              Research / Quantum
             </p>
-          </div>
-        </section>
+            <h1 className="mt-6 text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight gradient-text">
+              Research & Innovation
+            </h1>
+            <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
+              Danalitic AI Labs — advancing LLMs, Agentic AI, and
+              Quantum-Enhanced Intelligence. Open research, community
+              collaborations, and innovation grants powering the future of
+              generative AI.
+            </p>
 
-        {/* Research Pillars */}
-        <section className="py-20 border-t border-border">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="glass rounded-2xl p-8">
-                <BookOpen className="w-8 h-8 text-[#FF0066] mb-4" />
-                <h3 className="text-xl font-heading font-bold text-foreground mb-4">
-                  Open Research
-                </h3>
-                <p className="text-muted mb-4">
-                  Publishing findings on RAG performance, agent orchestration,
-                  and QML models.
-                </p>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#FF0066]">→</span>
-                    <span className="text-foreground">
-                      RAG Architecture Papers
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#FF0066]">→</span>
-                    <span className="text-foreground">
-                      Agent Orchestration Frameworks
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#FF0066]">→</span>
-                    <span className="text-foreground">Quantum ML Models</span>
-                  </li>
-                </ul>
-              </div>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <motion.a
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                className="glass inline-flex items-center gap-3 px-5 py-3 rounded-full text-sm font-medium gradient-button"
+                href="#open-research"
+              >
+                <Zap className="w-4 h-4" />
+                View Initiatives
+              </motion.a>
 
-              <div className="glass rounded-2xl p-8">
-                <Users className="w-8 h-8 text-cyan-400 mb-4" />
-                <h3 className="text-xl font-heading font-bold text-foreground mb-4">
-                  Community Engagement
-                </h3>
-                <p className="text-muted mb-4">
-                  Hackathons with AI Pune and GDG Cloud Pune to foster
-                  innovation.
-                </p>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-start gap-2">
-                    <span className="text-cyan-400">→</span>
-                    <span className="text-foreground">AI Pune Hackathons</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-cyan-400">→</span>
-                    <span className="text-foreground">
-                      GDG Cloud Collaborations
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-cyan-400">→</span>
-                    <span className="text-foreground">Developer Workshops</span>
-                  </li>
-                </ul>
-              </div>
+              <motion.a
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-3 px-5 py-3 rounded-full text-sm font-medium border border-border hover:shadow-md"
+                href="#collab"
+              >
+                <Award className="w-4 h-4 text-primary" />
+                Partnerships & Grants
+              </motion.a>
+            </div>
+          </motion.header>
 
-              <div className="glass rounded-2xl p-8">
-                <Lightbulb className="w-8 h-8 text-amber-400 mb-4" />
-                <h3 className="text-xl font-heading font-bold text-foreground mb-4">
-                  Innovation Grants
-                </h3>
-                <p className="text-muted mb-4">
-                  Collaborations with IITs and ISRO Labs on quantum-inspired ML.
-                </p>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-start gap-2">
-                    <span className="text-amber-400">→</span>
-                    <span className="text-foreground">
-                      IIT Research Partnerships
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-amber-400">→</span>
-                    <span className="text-foreground">
-                      ISRO Labs Collaboration
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-amber-400">→</span>
-                    <span className="text-foreground">Academic Funding</span>
-                  </li>
-                </ul>
+          {/* Visual */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-5"
+          >
+            <div className="relative w-full h-64 md:h-80 lg:h-96 rounded-2xl overflow-hidden glass animate-float">
+              <div className="absolute inset-0 gradient-mesh" />
+              <div className="absolute inset-0 flex items-center justify-center text-center">
+                <div>
+                  <h3 className="text-xl font-semibold">
+                    Quantum-inspired Experiments
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground max-w-sm mx-auto">
+                    Hybrid simulations, model introspection, and reproducible
+                    notebooks.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </motion.div>
+        </div>
+      </section>
 
-        {/* Featured Research */}
-        <section
-          className="py-20 border-t border-border"
-          style={{
-            background:
-              "linear-gradient(to bottom right, rgba(255, 0, 102, 0.03), rgba(255, 187, 51, 0.03))",
-          }}
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-4xl font-heading font-bold text-foreground mb-12">
-              Featured Research Areas
-            </h2>
-            <div className="space-y-6">
-              <div className="p-8 rounded-xl border-2 border-pink-200 hover:border-pink-400 hover:bg-pink-50 transition-all duration-300">
-                <h3 className="text-xl font-heading font-bold text-foreground mb-2">
-                  Large Language Models & RAG
-                </h3>
-                <p className="text-muted">
-                  Advanced retrieval-augmented generation for enterprise
-                  knowledge systems.
-                </p>
-              </div>
-              <div className="p-8 rounded-xl border-2 border-cyan-200 hover:border-cyan-400 hover:bg-cyan-50 transition-all duration-300">
-                <h3 className="text-xl font-heading font-bold text-foreground mb-2">
-                  Agentic AI & Multi-Agent Systems
-                </h3>
-                <p className="text-muted">
-                  Autonomous agents that reason, plan, and execute in complex
-                  enterprise workflows.
-                </p>
-              </div>
-              <div className="p-8 rounded-xl border-2 border-amber-200 hover:border-amber-400 hover:bg-amber-50 transition-all duration-300">
-                <h3 className="text-xl font-heading font-bold text-foreground mb-2">
-                  Quantum-Enhanced Machine Learning
-                </h3>
-                <p className="text-muted">
-                  Exploring hybrid classical-quantum approaches for optimization
-                  and prediction.
-                </p>
-              </div>
+      {/* Open Research */}
+      <section id="open-research" className="py-16">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="flex items-center justify-between gap-6">
+            <div>
+              <h2 className="text-3xl font-bold text-foreground">
+                Open Research Initiatives
+              </h2>
+              <p className="mt-2 text-muted-foreground max-w-xl">
+                Publishing findings on RAG performance, agent orchestration, and
+                QML models.
+              </p>
+            </div>
+
+            <div className="hidden md:flex gap-3">
+              <button className="px-4 py-2 rounded-lg border border-border hover:bg-input transition">
+                View papers
+              </button>
+              <button className="px-4 py-2 rounded-lg border border-border hover:bg-input transition">
+                Datasets
+              </button>
             </div>
           </div>
-        </section>
-      </main>
-    </>
+
+          <motion.div
+            className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            variants={container}
+            initial="hidden"
+            animate="show"
+          >
+            {researchItems.map((r) => (
+              <motion.article
+                key={r.id}
+                variants={item}
+                whileHover={{ scale: 1.02 }}
+                className="glass p-6 rounded-2xl"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="p-3 rounded-xl bg-input border border-border">
+                    <r.icon className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg">{r.title}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {r.subtitle}
+                    </p>
+                  </div>
+                </div>
+
+                <p className="mt-4 text-sm text-muted-foreground">{r.desc}</p>
+
+                <div className="mt-6 flex items-center justify-between">
+                  <a
+                    className="text-sm font-medium text-primary underline"
+                    href="#"
+                  >
+                    Read more
+                  </a>
+                  <motion.button
+                    whileTap={{ scale: 0.98 }}
+                    className="px-3 py-1 rounded-md gradient-button text-white text-sm font-semibold"
+                  >
+                    Open Lab
+                  </motion.button>
+                </div>
+              </motion.article>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Collaboration */}
+      <section id="collab" className="py-16">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            <motion.div
+              initial={{ opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-1"
+            >
+              <h3 className="text-2xl font-bold text-foreground">
+                Community & Collaboration
+              </h3>
+              <p className="mt-3 text-muted-foreground">
+                Hackathons with AI Pune and GDG Cloud Pune. Community-first
+                approach to reproducible research and ecosystem-building.
+              </p>
+
+              <div className="mt-6 flex flex-col gap-3">
+                <div className="flex items-center gap-3">
+                  <Badge icon={Users} label="Hackathons" />
+                  <Badge icon={Globe} label="Community" />
+                </div>
+                <div className="flex items-center gap-3 mt-3">
+                  <Badge icon={Award} label="IIT / ISRO Collaborations" />
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7 }}
+              className="lg:col-span-2"
+            >
+              <h4 className="text-lg font-semibold text-foreground">
+                Innovation Grants & Programs
+              </h4>
+              <div className="mt-4 overflow-x-auto py-3">
+                <div className="flex gap-4 min-w-[720px]">
+                  {[
+                    {
+                      title: "Quantum-Inspired ML Grant",
+                      org: "IIT Collaboration",
+                    },
+                    { title: "Agentic Systems Seed", org: "Internal" },
+                    { title: "Open Datasets Fellowship", org: "Community" },
+                  ].map((g, idx) => (
+                    <motion.div
+                      whileHover={{ y: -4 }}
+                      key={idx}
+                      className="glass p-5 rounded-2xl min-w-[220px]"
+                    >
+                      <h5 className="font-semibold">{g.title}</h5>
+                      <p className="mt-2 text-sm text-muted-foreground">
+                        Partner: {g.org}
+                      </p>
+                      <div className="mt-4 flex items-center justify-between">
+                        <a className="text-sm text-primary underline" href="#">
+                          Apply
+                        </a>
+                        <span className="text-xs text-muted-foreground">
+                          Open
+                        </span>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function Badge({ icon: Icon, label }: { icon: any; label: string }) {
+  return (
+    <div className="inline-flex items-center gap-3 bg-input px-3 py-2 rounded-lg border border-border">
+      <Icon className="w-5 h-5 text-primary" />
+      <span className="text-sm font-medium text-foreground">{label}</span>
+    </div>
   );
 }

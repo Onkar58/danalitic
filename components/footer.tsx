@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { Linkedin, Github, Twitter, Youtube } from "lucide-react"
+import Link from "next/link";
+import { Linkedin, Github, Twitter, Youtube } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -7,12 +7,15 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-5 gap-12 mb-12">
           <div className="md:col-span-1">
-            <Link href="/" className="font-heading font-bold text-xl text-foreground flex items-center gap-2 mb-4">
-              <div className="w-6 h-6 rounded-lg gradient-brand" />
-              Danalitic
+            <Link
+              href="/"
+              className="font-heading font-bold text-xl text-foreground flex items-center gap-2 w-48"
+            >
+              <img src="logo.png" alt="Logo" />
             </Link>
             <p className="text-sm text-muted leading-relaxed">
-              Empowering enterprises with intelligent AI platforms across every cloud.
+              Empowering enterprises with intelligent AI platforms across every
+              cloud.
             </p>
           </div>
 
@@ -43,10 +46,15 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="font-heading font-semibold text-foreground mb-4">Company</h3>
+            <h3 className="font-heading font-semibold text-foreground mb-4">
+              Company
+            </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/about" className="text-muted hover:text-foreground transition">
+                <Link
+                  href="/about"
+                  className="text-muted hover:text-foreground transition"
+                >
                   About
                 </Link>
               </li>
@@ -69,15 +77,23 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="font-heading font-semibold text-foreground mb-4">Legal</h3>
+            <h3 className="font-heading font-semibold text-foreground mb-4">
+              Legal
+            </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" className="text-muted hover:text-foreground transition">
+                <a
+                  href="#"
+                  className="text-muted hover:text-foreground transition"
+                >
                   Privacy
                 </a>
               </li>
               <li>
-                <a href="#" className="text-muted hover:text-foreground transition">
+                <a
+                  href="#"
+                  className="text-muted hover:text-foreground transition"
+                >
                   Terms
                 </a>
               </li>
@@ -143,5 +159,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

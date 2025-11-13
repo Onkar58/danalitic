@@ -3,11 +3,6 @@
 import { Atom, Bot, Brain, Cloud } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-// TIP: This version relies on your Tailwind design tokens from globals.css
-// (e.g., --background, --foreground, --primary, --muted, --border, typography, etc.).
-// Classes like bg-background, text-foreground, text-muted-foreground, border-border,
-// from-primary, to-secondary, etc. should already be mapped in your setup.
-
 const features = [
   {
     icon: <Brain />,
@@ -69,14 +64,11 @@ const FeatureCard = ({ feature, index }: { feature: any; index: number }) => {
     >
       <div className="bg-border absolute left-0 right-0 top-0 h-px md:hidden" />
 
-      {/* Icon tile */}
       <div className="bg-background relative -mt-6 mb-10 flex aspect-square w-12 items-center justify-center rounded-lg ring-1 ring-border md:-mt-10 md:mb-10 md:w-20 overflow-hidden">
-        {/* gradient overlay */}
         <div
           className={`absolute inset-0 rounded-lg opacity-20 transition-opacity duration-300 group-hover:opacity-40 bg-gradient-to-br ${feature.gradient}`}
         />
 
-        {/* icon itself */}
         <span
           className={`relative z-10 transition-transform duration-300 group-hover:scale-110 ${feature.iconColor}`}
         >
@@ -127,15 +119,8 @@ export default function DanalyticFeatures() {
           }}
         >
           <h2 className="mb-4 text-3xl font-bold md:text-5xl lg:text-6xl">
-            We Engineer{" "}
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Intelligence{" "}
-            </span>{" "}
-            that{" "}
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              {" "}
-              Performs
-            </span>
+            We Engineer <span className="gradient-text">Intelligence </span>{" "}
+            that <span className="gradient-text"> Performs</span>
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-foreground md:text-xl">
             Our platforms bring together AI + Cloud + Quantum to deliver

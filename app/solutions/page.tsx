@@ -7,8 +7,9 @@ import {
   Database,
   Zap,
 } from "lucide-react";
-import { useEffect, useState } from "react";
 import TechSections from "./tech-sections";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Solutions() {
   const solutions = [
@@ -78,10 +79,9 @@ export default function Solutions() {
       position: "right",
     },
   ];
-  const [activeService, setActiveService] = useState("ai");
   return (
     <>
-      <main className="min-h-screen">
+      <main className="min-h-screen ">
         {/* Hero Section */}
         <section className="relative min-h-96 flex items-center overflow-hidden">
           <div className="absolute inset-0 gradient-mesh pointer-events-none" />
@@ -97,30 +97,62 @@ export default function Solutions() {
               solutions that drive measurable business value.
             </p>
             <div className="flex gap-4 mt-8">
-              <button className="px-8 py-3 rounded-full font-semibold gradient-brand text-white hover:shadow-lg hover:shadow-pink-500/30 transition-all">
-                Explore Solutions
+              <button className="px-8 py-3 rounded-full font-semibold gradient-button hover:shadow-lg hover:shadow-pink-500/30 transition-all">
+                <Link href="#solutions">Explore Solutions</Link>
               </button>
               <button className="px-8 py-3 rounded-full font-semibold border-2 border-border text-foreground hover:bg-gray-50 transition-all">
-                Schedule Consultation
+                <Link href="contact">Schedule Consultation</Link>
               </button>
             </div>
           </div>
         </section>
 
-        <div className="py-32 space-y-32">
+        <div className="py-32 space-y-32" id="solutions">
           {solutions.map((service, idx) => {
             const IconComponent = service.icon;
+
+            // Motion Variants
+            const textVariants = {
+              hidden: {
+                opacity: 0,
+                x: service.position === "right" ? 80 : -80,
+              },
+              visible: { opacity: 1, x: 0 },
+            };
+
+            const visualVariants = {
+              hidden: { opacity: 0, y: 60, scale: 0.95 },
+              visible: { opacity: 1, y: 0, scale: 1 },
+            };
+
+            const containerTransition = {
+              duration: 0.8,
+              ease: "easeOut",
+            };
+
             return (
               <section
+                id={service.id}
                 key={service.id}
                 data-service={service.id}
-                className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${idx > 0 ? "mt-12" : ""}`}
+                className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${
+                  idx > 0 ? "mt-12" : ""
+                }`}
               >
                 <div
-                  className={`grid lg:grid-cols-2 gap-12 items-center ${service.position === "right" ? "lg:flex-row-reverse" : ""}`}
+                  className={`grid lg:grid-cols-2 gap-12 items-center ${
+                    service.position === "right" ? "lg:flex-row-reverse" : ""
+                  }`}
                 >
-                  {/* Text Content */}
-                  <div
+                  {/* ============================
+             TEXT SECTION (Animated)
+          =============================*/}
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    variants={textVariants}
+                    transition={containerTransition}
                     className={
                       service.position === "right" ? "lg:order-2" : "lg:order-1"
                     }
@@ -158,10 +190,17 @@ export default function Solutions() {
                       Learn more{" "}
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </button>
-                  </div>
+                  </motion.div>
 
-                  {/* Visual Element - Gradient Box with nodes */}
-                  <div
+                  {/* ============================
+             VISUAL SECTION (Animated)
+          =============================*/}
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    variants={visualVariants}
+                    transition={{ duration: 1, ease: "easeOut" }}
                     className={
                       service.position === "right" ? "lg:order-1" : "lg:order-2"
                     }
@@ -177,7 +216,6 @@ export default function Solutions() {
                         <div className="absolute bottom-20 left-20 w-40 h-40 bg-white rounded-full blur-3xl opacity-15" />
                       </div>
 
-                      {/* Animated nodes */}
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="relative w-40 h-40">
                           {[0, 1, 2, 3].map((i) => {
@@ -201,10 +239,12 @@ export default function Solutions() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
 
-                {/* Diagonal separator */}
+                {/* ======================================
+           DIAGONAL SEPARATOR (kept as is)
+        ====================================== */}
                 {idx < solutions.length - 1 && (
                   <div className="mt-24 relative h-20 overflow-hidden opacity-20">
                     <svg
