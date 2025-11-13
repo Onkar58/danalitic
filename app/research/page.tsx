@@ -1,15 +1,7 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
-import { Cpu, Users, Globe, Award, Zap, BookOpen } from "lucide-react";
-
-/**
- * Research page for Danalitic AI Labs — Light Mode Version
- * - Next.js App Router friendly
- * - Tailwind classes, built for the provided light mode globals.css
- * - Framer Motion for subtle motion
- */
+import { Award, BookOpen, Cpu, Globe, Users, Zap } from "lucide-react";
 
 const researchItems = [
   {

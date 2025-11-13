@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  ArrowRight,
-  Brain,
-  Cloud,
-  Signal,
-  Zap,
-  AudioLines,
-} from "lucide-react";
+import { ArrowRight, Atom, Brain, Cloud, Workflow, Zap } from "lucide-react";
 import Link from "next/link";
 
 export default function Hero() {
@@ -64,19 +57,29 @@ export default function Hero() {
           </div>
 
           {/* Right Column - Visual Grid */}
+          {/* Right Column - Visual Grid */}
           <div className="hidden lg:block">
             <div className="grid grid-cols-[8.5rem_10rem_19.3rem] grid-rows-[16.625rem_15.5rem_1.375rem_6.9rem] gap-5">
-              {/* Top Large Image */}
-              <div className="col-span-2 col-start-2 overflow-hidden rounded-3xl bg-gradient-to-br from-blue-200 to-cyan-300 shadow-xl">
-                <div className="w-full h-full flex items-center justify-center">
-                  <Cloud className="w-24 h-24 text-white/40" />
+              {/* Top Large Image - Hybrid Cloud */}
+              <div className="col-span-2 col-start-2 overflow-hidden rounded-3xl bg-gradient-to-br from-blue-400 via-cyan-400 to-indigo-500 shadow-xl relative group">
+                <div className="w-full h-full flex items-center justify-center relative">
+                  <Cloud className="w-24 h-24 text-white/30 absolute" />
+                  <Workflow className="w-16 h-16 text-white/50 absolute top-8 right-8 group-hover:scale-110 transition-transform" />
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <div className="text-xs font-bold text-white/90 mb-1">
+                      HYBRID CLOUD
+                    </div>
+                    <div className="text-sm text-white/70">
+                      AWS • Azure • GCP
+                    </div>
+                  </div>
                 </div>
               </div>
 
               {/* Decorative Arrow */}
               <div className="col-start-1 row-start-1 self-end">
                 <svg
-                  className="w-32 text-slate-400"
+                  className="w-32 text-pink-300/40"
                   viewBox="0 0 131 174"
                   fill="currentColor"
                 >
@@ -88,33 +91,44 @@ export default function Hero() {
                 </svg>
               </div>
 
-              {/* Stats Card */}
-              <div className="col-span-2 col-start-1 row-start-2 bg-slate-100 rounded-3xl p-7 overflow-hidden">
+              {/* Stats Card - Cost Savings */}
+              <div className="col-span-2 col-start-1 row-start-2 bg-gradient-to-br from-pink-50 to-rose-50 rounded-3xl p-7 overflow-hidden border border-pink-200/50">
                 <div className="flex gap-7 items-start">
-                  <div className="text-6xl font-bold text-slate-900">99%</div>
-                  <Signal className="w-14 h-14 text-slate-900" />
+                  <div className="text-6xl font-bold bg-gradient-to-r from-pink-600 to-rose-500 bg-clip-text text-transparent">
+                    40%
+                  </div>
+                  <Zap className="w-14 h-14 text-pink-600" />
                 </div>
                 <p className="mt-7 text-lg text-slate-900">
-                  Crystal-clear{" "}
-                  <span className="font-bold text-slate-600">
-                    voice and video
+                  Average{" "}
+                  <span className="font-bold text-pink-600">
+                    cloud cost savings
                   </span>{" "}
-                  calls with no background noise
+                  with our hybrid infrastructure optimization
                 </p>
               </div>
 
-              {/* Audio Icon Card */}
-              <div className="col-start-2 row-span-2 row-start-3 bg-slate-100 rounded-3xl flex items-center justify-center">
-                <AudioLines className="w-16 h-16 text-slate-900" />
+              {/* Quantum Icon Card */}
+              <div className="col-start-2 row-span-2 row-start-3 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-3xl flex items-center justify-center group hover:scale-105 transition-transform border border-indigo-200/50">
+                <Atom className="w-16 h-16 text-indigo-600 group-hover:rotate-180 transition-transform duration-700" />
               </div>
 
-              {/* Side Image with Arrow */}
-              <div className="relative col-start-3 row-span-2 row-start-2 bg-gradient-to-br from-slate-200 to-slate-300 rounded-3xl overflow-hidden shadow-xl">
-                <div className="w-full h-full flex items-center justify-center">
-                  <Brain className="w-24 h-24 text-white/40" />
+              {/* Side Image - AI Brain with Arrow */}
+              <div className="relative col-start-3 row-span-2 row-start-2 bg-gradient-to-br from-rose-400 via-pink-500 to-orange-500 rounded-3xl overflow-hidden shadow-xl group">
+                <div className="w-full h-full flex items-center justify-center relative">
+                  <Brain className="w-24 h-24 text-white/30 absolute group-hover:scale-110 transition-transform" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <div className="text-xs font-bold text-white/90 mb-1">
+                      AGENTIC AI
+                    </div>
+                    <div className="text-sm text-white/70">
+                      LLMs • RAG • Multi-Agent
+                    </div>
+                  </div>
                 </div>
                 <svg
-                  className="absolute -bottom-24 -right-14 w-16 rotate-45 text-slate-400"
+                  className="absolute -bottom-24 -right-14 w-16 rotate-45 text-white/20"
                   viewBox="0 0 90 184"
                   fill="currentColor"
                 >
@@ -126,20 +140,32 @@ export default function Hero() {
                 </svg>
               </div>
 
-              {/* User Cards */}
+              {/* Capability Pills */}
               <div className="col-start-3 row-start-4 space-y-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-slate-200 flex-shrink-0" />
-                  <div className="flex-1 space-y-1">
-                    <div className="h-6 w-[70%] bg-slate-200 rounded-lg" />
-                    <div className="h-3 w-[40%] bg-slate-200 rounded-lg" />
+                <div className="flex items-center gap-3 bg-white rounded-2xl p-3 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex-shrink-0 flex items-center justify-center">
+                    <Brain className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-sm font-bold text-slate-900">
+                      LLM & RAG
+                    </div>
+                    <div className="text-xs text-slate-500">
+                      Fine-tuned models
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-slate-200 flex-shrink-0" />
-                  <div className="flex-1 space-y-1">
-                    <div className="h-6 w-[70%] bg-slate-200 rounded-lg" />
-                    <div className="h-3 w-[40%] bg-slate-200 rounded-lg" />
+                <div className="flex items-center gap-3 bg-white rounded-2xl p-3 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 flex-shrink-0 flex items-center justify-center">
+                    <Workflow className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-sm font-bold text-slate-900">
+                      Multi-Agent AI
+                    </div>
+                    <div className="text-xs text-slate-500">
+                      Autonomous systems
+                    </div>
                   </div>
                 </div>
               </div>
