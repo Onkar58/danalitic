@@ -160,7 +160,22 @@
   .gradient-button:hover {
     background-position: 100% 100%;
   }
+  .gradient-border {
+    border: 1px solid transparent; /* thickness */
 
+    background:
+      linear-gradient(#fff, #fff) padding-box,
+      /* inner background (replace #000) */
+        linear-gradient(to right, #ff0066, #ff8844, #ffbb33) border-box;
+
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    transition: background-position 700ms ease-out;
+  }
+
+  .gradient-border:hover {
+    background-position: 100% 100%;
+  }
   .gradient-mesh {
     background:
       radial-gradient(
