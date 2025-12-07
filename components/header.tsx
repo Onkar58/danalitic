@@ -10,13 +10,17 @@ export default function Header() {
 
   const pathname = usePathname();
   const links = [
-    { href: "/about", label: "About" },
-    { href: "/solutions", label: "Solutions" },
-    { href: "/research", label: "Research" },
+    // { href: "/about", label: "About" },
+    // { href: "/solutions", label: "Solutions" },
+    // { href: "/research", label: "Research" },
+    { href: "/services", label: "Services" },
+    { href: "/case-studies", label: "Case Studies" },
+    { href: "/industries", label: "Industries" },
+    { href: "/blogs", label: "Blogs" },
     { href: "/careers", label: "Careers" },
   ];
   return (
-    <header className="sticky top-0 z-50  backdrop-blur-lg">
+    <header className="sticky top-0 z-50 bg-white backdrop-blur-lg">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
         <Link
           href="/"

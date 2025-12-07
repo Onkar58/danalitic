@@ -61,7 +61,7 @@ export default function Hero() {
           <div className="hidden lg:block">
             <div className="grid grid-cols-[8.5rem_10rem_19.3rem] grid-rows-[16.625rem_15.5rem_1.375rem_6.9rem] gap-5">
               {/* Top Large Image - Hybrid Cloud */}
-              <div className="col-span-2 col-start-2 overflow-hidden rounded-3xl bg-gradient-to-br from-blue-400 via-cyan-400 to-indigo-500 shadow-xl relative group">
+              <div className="col-span-2 col-start-2 overflow-hidden rounded-3xl gradient-brand shadow-xl relative group">
                 <div className="w-full h-full flex items-center justify-center relative">
                   <Cloud className="w-24 h-24 text-white/30 absolute" />
                   <Workflow className="w-16 h-16 text-white/50 absolute top-8 right-8 group-hover:scale-110 transition-transform" />
