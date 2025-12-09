@@ -1,10 +1,6 @@
-import type { Metadata } from "next";
 import { ServicesHero } from "@/components/services/services-hero";
-import { AIMLSection } from "@/components/services/ai-ml-section";
-import { CloudSection } from "@/components/services/cloud-section";
-import { DataScienceSection } from "@/components/services/data-science-section";
-import { QuantumSection } from "@/components/services/quantum-section";
-import { ServicesCTA } from "@/components/services/services-cta";
+import { ServicesTabs } from "@/components/services/servicesTabs";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "AI & Cloud Solutions | Danalitic",
@@ -16,11 +12,7 @@ export default function ServicesPage() {
   return (
     <main>
       <ServicesHero />
-      <AIMLSection />
-      <CloudSection />
-      <DataScienceSection />
-      <QuantumSection />
-      <ServicesCTA />
+      <ServicesTabs />
     </main>
   );
 }

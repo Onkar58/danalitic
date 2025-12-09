@@ -20,26 +20,40 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="font-heading font-semibold text-foreground mb-4">Solutions</h3>
+            <h3 className="font-heading font-semibold text-foreground mb-4">
+              Services
+            </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/solutions#ai" className="text-muted hover:text-foreground transition">
-                  AI & LLM
+                <Link
+                  href="/services?tab=ai"
+                  className="text-muted hover:text-foreground transition"
+                >
+                  AI & ML
                 </Link>
               </li>
               <li>
-                <Link href="/solutions#data" className="text-muted hover:text-foreground transition">
-                  Data Science
+                <Link
+                  href="/services?tab=cloud"
+                  className="text-muted hover:text-foreground transition"
+                >
+                  Cloud Infra
                 </Link>
               </li>
               <li>
-                <Link href="/solutions#cloud" className="text-muted hover:text-foreground transition">
-                  Cloud Engineering
+                <Link
+                  href="/services?tab=data"
+                  className="text-muted hover:text-foreground transition"
+                >
+                  Data Analytics
                 </Link>
               </li>
               <li>
-                <Link href="/solutions#quantum" className="text-muted hover:text-foreground transition">
-                  Quantum AI
+                <Link
+                  href="/services?tab=quantum"
+                  className="text-muted hover:text-foreground transition"
+                >
+                  Quantum Computing
                 </Link>
               </li>
             </ul>
@@ -59,18 +73,27 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/careers" className="text-muted hover:text-foreground transition">
+                <Link
+                  href="/careers"
+                  className="text-muted hover:text-foreground transition"
+                >
                   Careers
                 </Link>
               </li>
               <li>
-                <Link href="/research" className="text-muted hover:text-foreground transition">
-                  Research
+                <Link
+                  href="/case-studies"
+                  className="text-muted hover:text-foreground transition"
+                >
+                  Case Studies
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-muted hover:text-foreground transition">
-                  Blog
+                <a
+                  href="/blogs"
+                  className="text-muted hover:text-foreground transition"
+                >
+                  Blogs
                 </a>
               </li>
             </ul>
@@ -98,12 +121,18 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-muted hover:text-foreground transition">
+                <a
+                  href="#"
+                  className="text-muted hover:text-foreground transition"
+                >
                   Security
                 </a>
               </li>
               <li>
-                <a href="#" className="text-muted hover:text-foreground transition">
+                <a
+                  href="#"
+                  className="text-muted hover:text-foreground transition"
+                >
                   Compliance
                 </a>
               </li>
@@ -111,25 +140,39 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="font-heading font-semibold text-foreground mb-4">Connect</h3>
+            <h3 className="font-heading font-semibold text-foreground mb-4">
+              Connect
+            </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" className="text-muted hover:text-foreground transition">
+                <a
+                  href="#"
+                  className="text-muted hover:text-foreground transition"
+                >
                   LinkedIn
                 </a>
               </li>
               <li>
-                <a href="#" className="text-muted hover:text-foreground transition">
+                <a
+                  href="#"
+                  className="text-muted hover:text-foreground transition"
+                >
                   GitHub
                 </a>
               </li>
               <li>
-                <a href="#" className="text-muted hover:text-foreground transition">
+                <a
+                  href="#"
+                  className="text-muted hover:text-foreground transition"
+                >
                   X (Twitter)
                 </a>
               </li>
               <li>
-                <a href="#" className="text-muted hover:text-foreground transition">
+                <a
+                  href="#"
+                  className="text-muted hover:text-foreground transition"
+                >
                   YouTube
                 </a>
               </li>
@@ -140,18 +183,32 @@ export default function Footer() {
         {/* Bottom bar with animated glow line */}
         <div className="pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <p className="text-sm text-muted">© 2025 Danalitic. All rights reserved.</p>
+            <p className="text-sm text-muted">
+              © 2025 Danalitic. All rights reserved.
+            </p>
             <div className="flex gap-6">
-              <a href="#" className="text-muted hover:text-accent transition p-2">
+              <a
+                href="#"
+                className="text-muted hover:text-accent transition p-2"
+              >
                 <Linkedin className="w-4 h-4" />
               </a>
-              <a href="#" className="text-muted hover:text-accent transition p-2">
+              <a
+                href="#"
+                className="text-muted hover:text-accent transition p-2"
+              >
                 <Github className="w-4 h-4" />
               </a>
-              <a href="#" className="text-muted hover:text-accent transition p-2">
+              <a
+                href="#"
+                className="text-muted hover:text-accent transition p-2"
+              >
                 <Twitter className="w-4 h-4" />
               </a>
-              <a href="#" className="text-muted hover:text-accent transition p-2">
+              <a
+                href="#"
+                className="text-muted hover:text-accent transition p-2"
+              >
                 <Youtube className="w-4 h-4" />
               </a>
             </div>

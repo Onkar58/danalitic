@@ -52,7 +52,7 @@ export function CloudSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section id="cloud" className="py-24 gradient-mesh">
+    <section id="cloud" className="py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex items-center gap-4 mb-12">
           <div className="p-3 rounded-xl bg-gradient-to-r from-[#00BFFF] to-[#00FFFF]">
