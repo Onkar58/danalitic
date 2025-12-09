@@ -55,10 +55,10 @@ export function AboutCta() {
           </Link>
 
           <Link
-            href="/solutions"
+            href="/services"
             className="group inline-flex items-center gap-3 px-8 py-4 border border-black/20 text-gray-900 text-sm font-semibold tracking-wide rounded-lg hover:border-primary hover:text-primary transition-colors"
           >
-            View Solutions
+            View services
           </Link>
         </div>
       </div>

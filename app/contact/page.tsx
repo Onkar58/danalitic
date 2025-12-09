@@ -95,10 +95,10 @@ export default function ContactPage() {
                 <ul className="space-y-2 text-sm">
                   <li>
                     <a
-                      href="/solutions"
+                      href="/services"
                       className="text-[#FF0066] hover:underline"
                     >
-                      Explore Our Solutions
+                      Explore Our Services
                     </a>
                   </li>
                   <li>

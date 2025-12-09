@@ -43,10 +43,10 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4">
               <button className="group relative px-8 py-4 gradient-button rounded-full font-bold overflow-hidden transition-all hover:shadow-xl hover:shadow-pink-500/30">
                 <Link
-                  href="/solutions"
+                  href="/services"
                   className="relative z-10 flex items-center justify-center gap-2"
                 >
-                  Explore Our Solutions
+                  Explore Our services
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </button>

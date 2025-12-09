@@ -120,10 +120,10 @@ export function AboutHero() {
           className={`mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-700 delay-400 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
         >
           <Link
-            href="/solutions"
+            href="/services"
             className="group inline-flex items-center gap-3 px-8 py-4 gradient-button text-white text-sm font-semibold tracking-wide rounded-lg hover:opacity-90 transition-opacity"
           >
-            See Our Solutions
+            See Our services
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
 
