@@ -1,30 +1,41 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
-import "./globals.css"
+import type { Metadata } from "next";
+import { Inter, Poppins, Space_Grotesk } from "next/font/google";
+import type React from "react";
+import "./globals.css";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const _poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-heading",
+});
+const _inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const _spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-accent",
+});
 
 export const metadata: Metadata = {
-  title: "Enterprise AI Solutions | AI Services",
+  title: "Danalitic – Crafting Intelligent AI Platforms",
   description:
-    "Deploy generative AI, machine learning, and cloud infrastructure that drives measurable business outcomes.",
-    generator: 'v0.app'
-}
+    "Enterprise AI, Hybrid Cloud & Quantum Solutions for the Modern Era. From LLMs to Agentic AI, we build systems that think, adapt, and scale.",
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`font-sans antialiased bg-background text-foreground`}>
+    <html lang="en" style={{ scrollBehavior: "smooth" }}>
+      <body
+        className={`${_inter.variable} ${_poppins.variable} ${_spaceGrotesk.variable} font-sans antialiased bg-background text-foreground scroll-smooth`}
+      >
+        <Header />
         {children}
-        <Analytics />
+        <Footer />
       </body>
     </html>
-  )
+  );
 }
