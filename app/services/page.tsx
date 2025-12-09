@@ -1,6 +1,7 @@
 import { ServicesHero } from "@/components/services/services-hero";
 import { ServicesTabs } from "@/components/services/servicesTabs";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "AI & Cloud Solutions | Danalitic",
@@ -12,7 +13,9 @@ export default function ServicesPage() {
   return (
     <main>
       <ServicesHero />
-      <ServicesTabs />
+      <Suspense>
+        <ServicesTabs />
+      </Suspense>
     </main>
   );
 }
