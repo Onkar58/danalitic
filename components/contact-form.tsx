@@ -1,11 +1,13 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { ArrowRight } from "lucide-react"
+import { useState } from "react";
+import { ArrowRight } from "lucide-react";
 
 export default function ContactForm() {
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,41 +19,63 @@ export default function ContactForm() {
     contact: "email",
     phone: "",
     agree: false,
-  })
+  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target
-    const checked = (e.target as HTMLInputElement).checked
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
+    const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
     setFormData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
-    }))
-  }
+    }));
+  };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
-    // Here you would typically send the data to a server
-    alert("Thank you for reaching out! We'll be in touch soon.")
-    setFormData({
-      name: "",
-      email: "",
-      company: "",
-      industry: "",
-      projectType: "",
-      message: "",
-      source: "",
-      contact: "email",
-      phone: "",
-      agree: false,
-    })
-  }
+    // Check required fields
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.company ||
+      !formData.message ||
+      !formData.phone
+    ) {
+      setStatus("Please fill all required fields.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const { agree, ...payload } = formData;
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error("Failed to submit");
+
+      setStatus("Your enquiry has been submitted successfully.");
+    } catch (err) {
+      setStatus("Something went wrong. Try again.");
+    }
+
+    setLoading(false);
+  };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Name */}
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+        <label
+          htmlFor="name"
+          className="block text-sm font-medium text-foreground mb-2"
+        >
           Full Name *
         </label>
         <input
@@ -68,7 +92,10 @@ export default function ContactForm() {
 
       {/* Email */}
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium text-foreground mb-2"
+        >
           Email Address *
         </label>
         <input
@@ -85,7 +112,10 @@ export default function ContactForm() {
 
       {/* Company */}
       <div>
-        <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2">
+        <label
+          htmlFor="company"
+          className="block text-sm font-medium text-foreground mb-2"
+        >
           Company Name *
         </label>
         <input
@@ -102,7 +132,10 @@ export default function ContactForm() {
 
       {/* Industry */}
       <div>
-        <label htmlFor="industry" className="block text-sm font-medium text-foreground mb-2">
+        <label
+          htmlFor="industry"
+          className="block text-sm font-medium text-foreground mb-2"
+        >
           Industry
         </label>
         <select
@@ -125,7 +158,10 @@ export default function ContactForm() {
 
       {/* Project Type */}
       <div>
-        <label htmlFor="projectType" className="block text-sm font-medium text-foreground mb-2">
+        <label
+          htmlFor="projectType"
+          className="block text-sm font-medium text-foreground mb-2"
+        >
           Project Type
         </label>
         <select
@@ -147,7 +183,10 @@ export default function ContactForm() {
 
       {/* Message */}
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+        <label
+          htmlFor="message"
+          className="block text-sm font-medium text-foreground mb-2"
+        >
           Message *
         </label>
         <textarea
@@ -164,7 +203,10 @@ export default function ContactForm() {
 
       {/* How did you hear */}
       <div>
-        <label htmlFor="source" className="block text-sm font-medium text-foreground mb-2">
+        <label
+          htmlFor="source"
+          className="block text-sm font-medium text-foreground mb-2"
+        >
           How did you hear about us?
         </label>
         <select
@@ -186,7 +228,9 @@ export default function ContactForm() {
 
       {/* Contact Method */}
       <div>
-        <label className="block text-sm font-medium text-foreground mb-2">Preferred Contact Method</label>
+        <label className="block text-sm font-medium text-foreground mb-2">
+          Preferred Contact Method
+        </label>
         <div className="flex gap-4">
           <label className="flex items-center gap-2">
             <input
@@ -216,7 +260,10 @@ export default function ContactForm() {
       {/* Phone (conditional) */}
       {formData.contact === "phone" && (
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
+          <label
+            htmlFor="phone"
+            className="block text-sm font-medium text-foreground mb-2"
+          >
             Phone Number
           </label>
           <input
@@ -242,7 +289,8 @@ export default function ContactForm() {
           className="w-4 h-4 mt-1"
         />
         <span className="text-sm text-muted">
-          I agree to receive communications from Danalitic regarding my inquiry and future updates.
+          I agree to receive communications from Danalitic regarding my inquiry
+          and future updates.
         </span>
       </label>
 
@@ -255,5 +303,5 @@ export default function ContactForm() {
         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
       </button>
     </form>
-  )
+  );
 }
