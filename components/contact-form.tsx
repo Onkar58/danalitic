@@ -1,25 +1,28 @@
 "use client";
 
 import type React from "react";
-
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
-export default function ContactForm() {
+const initialState = {
+  name: "",
+  email: "",
+  company: "",
+  industry: "",
+  projectType: "",
+  message: "",
+  source: "",
+  contact: "email",
+  phone: "",
+  agree: false,
+};
+
+export function ContactForm() {
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState("");
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    industry: "",
-    projectType: "",
-    message: "",
-    source: "",
-    contact: "email",
-    phone: "",
-    agree: false,
-  });
+  const [formData, setFormData] = useState(initialState);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -28,49 +31,69 @@ export default function ContactForm() {
   ) => {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
+
     setFormData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
   };
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setStatus("");
 
-    // Check required fields
+  const validateForm = () => {
     if (
       !formData.name ||
       !formData.email ||
       !formData.company ||
-      !formData.message ||
-      !formData.phone
+      !formData.message
     ) {
-      setStatus("Please fill all required fields.");
-      setLoading(false);
-      return;
+      toast.error("Missing required fields");
+      return false;
     }
+
+    if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+      toast.error("Invalid email");
+      return false;
+    }
+
+    if (formData.contact === "phone" && !formData.phone) {
+      toast.error("Phone number required");
+      return false;
+    }
+
+    if (!formData.agree) {
+      toast.error("Consent required");
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    setLoading(true);
 
     try {
       const { agree, ...payload } = formData;
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        body: JSON.stringify(payload),
+
+      await addDoc(collection(db, "contact-enquiries"), {
+        ...payload,
+        createdAt: serverTimestamp(),
       });
 
-      if (!res.ok) throw new Error("Failed to submit");
-
-      setStatus("Your enquiry has been submitted successfully.");
-    } catch (err) {
-      setStatus("Something went wrong. Try again.");
+      toast.success("Message sent 🎉");
+      setFormData(initialState);
+    } catch (error) {
+      console.error(error);
+      toast.error("Submission failed");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Name */}
+      {/* --- Your existing fields remain unchanged --- */}
       <div>
         <label
           htmlFor="name"
@@ -89,7 +112,6 @@ export default function ContactForm() {
           placeholder="Your name"
         />
       </div>
-
       {/* Email */}
       <div>
         <label
@@ -109,7 +131,6 @@ export default function ContactForm() {
           placeholder="you@company.com"
         />
       </div>
-
       {/* Company */}
       <div>
         <label
@@ -129,7 +150,6 @@ export default function ContactForm() {
           placeholder="Your company"
         />
       </div>
-
       {/* Industry */}
       <div>
         <label
@@ -155,7 +175,6 @@ export default function ContactForm() {
           <option value="other">Other</option>
         </select>
       </div>
-
       {/* Project Type */}
       <div>
         <label
@@ -180,7 +199,6 @@ export default function ContactForm() {
           <option value="other">Other</option>
         </select>
       </div>
-
       {/* Message */}
       <div>
         <label
@@ -200,7 +218,6 @@ export default function ContactForm() {
           placeholder="Tell us about your project or inquiry..."
         />
       </div>
-
       {/* How did you hear */}
       <div>
         <label
@@ -225,7 +242,6 @@ export default function ContactForm() {
           <option value="other">Other</option>
         </select>
       </div>
-
       {/* Contact Method */}
       <div>
         <label className="block text-sm font-medium text-foreground mb-2">
@@ -256,7 +272,6 @@ export default function ContactForm() {
           </label>
         </div>
       </div>
-
       {/* Phone (conditional) */}
       {formData.contact === "phone" && (
         <div>
@@ -277,7 +292,6 @@ export default function ContactForm() {
           />
         </div>
       )}
-
       {/* Agreement */}
       <label className="flex items-start gap-2">
         <input
@@ -293,14 +307,25 @@ export default function ContactForm() {
           and future updates.
         </span>
       </label>
-
       {/* Submit */}
       <button
         type="submit"
-        className="w-full px-6 py-3 gradient-brand text-white rounded-lg font-medium hover:shadow-lg hover:shadow-pink-300 transition-all duration-300 flex items-center justify-center gap-2 group"
+        disabled={loading}
+        className="w-full px-6 py-3 gradient-brand text-white rounded-lg font-medium
+        hover:shadow-lg hover:shadow-pink-300 transition-all duration-300
+        flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        Send Message
-        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        {loading ? (
+          <>
+            <Loader2 className="w-4 h-4 animate-spin" />
+            Sending...
+          </>
+        ) : (
+          <>
+            Send Message
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </>
+        )}
       </button>
     </form>
   );
