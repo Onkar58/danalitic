@@ -191,6 +191,7 @@ export default function Header() {
 
                 return (
                   <Link
+                    onClick={() => setIsOpen(false)}
                     key={item.href}
                     href={item.href}
                     className={`block px-4 py-2 rounded-lg hover:bg-secondary/5 transition ${
