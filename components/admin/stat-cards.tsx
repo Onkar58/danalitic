@@ -1,29 +1,17 @@
-import { TrendingUp, MessageSquare, Clock, Calendar } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { MessageSquare } from "lucide-react";
 
 interface StatCardsProps {
   totalQueries: number;
-  responsePending: number;
-  lastUpdated: Date;
 }
 
-export function StatCards({
-  totalQueries,
-  responsePending,
-  lastUpdated,
-}: StatCardsProps) {
+export function StatCards({ totalQueries }: StatCardsProps) {
   const stats = [
     {
       label: "Total Queries",
       value: totalQueries,
       icon: MessageSquare,
       color: "text-blue-600",
-    },
-    {
-      label: "Response Pending",
-      value: responsePending,
-      icon: Clock,
-      color: "text-orange-600",
     },
   ];
 

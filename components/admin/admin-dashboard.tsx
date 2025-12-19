@@ -6,6 +6,7 @@ import { StatCards } from "./stat-cards";
 import { ContactQueriesTable, ContactQuery } from "./contact-queries-table";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { Loader } from "../ui/loader";
 
 export function AdminDashboard() {
   const [queries, setQueries] = useState<ContactQuery[]>([]);
@@ -47,7 +48,7 @@ export function AdminDashboard() {
           responsePending={Math.floor(totalQueries * 0.6)}
           lastUpdated={lastUpdated}
         />
-        <ContactQueriesTable data={queries} />
+        {loading ? <Loader /> : <ContactQueriesTable data={queries} />}
       </div>
     </div>
   );

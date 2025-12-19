@@ -1,18 +1,35 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import { useEffect } from "react";
+import { Menu, X, User } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function Header() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsLoggedIn(!!user);
+    });
+
+    return () => unsubscribe();
+  }, []);
   const [isOpen, setIsOpen] = useState(false);
   const [showProductsDropdown, setShowProductsDropdown] = useState(false);
 
   const pathname = usePathname();
 
   const links = [
+    {
+      href: "/about",
+      label: "About",
+    },
+
     { href: "/services", label: "Services" },
     { href: "/case-studies", label: "Case Studies" },
     { href: "/industries", label: "Industries" },
@@ -111,7 +128,25 @@ export default function Header() {
         </div>
 
         {/* CTA + Menu Toggle */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          {/* Profile Icon (ONLY when logged in) */}
+          {isLoggedIn && (
+            <Link
+              href="/dashboard"
+              aria-label="Dashboard"
+              className="
+        flex h-9 w-9 items-center justify-center rounded-full
+        border border-black/[0.08]
+        hover:bg-secondary/10
+        hover:border-black/[0.15]
+        transition
+      "
+            >
+              <User className="h-4 w-4 text-muted-foreground" />
+            </Link>
+          )}
+
+          {/* Contact CTA */}
           <Link
             href="/contact"
             className="hidden sm:inline-block px-6 py-2 gradient-button rounded-lg font-medium hover:shadow-lg hover:shadow-[#FF0066]/25"
@@ -119,6 +154,7 @@ export default function Header() {
             Contact Us
           </Link>
 
+          {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden p-2 hover:bg-secondary/10 rounded-lg transition"

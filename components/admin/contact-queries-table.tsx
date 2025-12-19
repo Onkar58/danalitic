@@ -20,6 +20,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Timestamp } from "firebase/firestore";
+import { Eye } from "lucide-react";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export interface ContactQuery {
   id: string;
@@ -121,7 +130,7 @@ export function ContactQueriesTable({ data }: ContactQueriesTableProps) {
           `"${item.phone}"`,
           `"${item.source}"`,
           `"${item.message.replace(/"/g, '""')}"`,
-          `"${item.createdAt}"`,
+          `"${item.createdAt.toDate().toDateString()}"`,
         ].join(","),
       ),
     ].join("\n");
@@ -234,8 +243,39 @@ export function ContactQueriesTable({ data }: ContactQueriesTableProps) {
                   <TableCell className="text-sm">{query.phone}</TableCell>
                   <TableCell className="text-sm">{query.source}</TableCell>
                   <TableCell className="max-w-xs">
-                    <div className="text-sm line-clamp-2" title={query.message}>
-                      {query.message}
+                    <div className="flex items-start gap-2">
+                      {/* Truncated preview */}
+                      <div
+                        className="flex-1 text-sm line-clamp-2"
+                        title={query.message}
+                      >
+                        {query.message}
+                      </div>
+
+                      {/* View full message (Dialog) */}
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <button
+                            className="mt-0.5 rounded-md p-1 text-muted-foreground hover:bg-muted hover:text-foreground transition"
+                            aria-label="View full message"
+                          >
+                            <Eye className="h-4 w-4" />
+                          </button>
+                        </DialogTrigger>
+
+                        <DialogContent className="max-w-2xl">
+                          <DialogHeader>
+                            <DialogTitle>Full Message</DialogTitle>
+                          </DialogHeader>
+
+                          {/* Scrollable content */}
+                          <div className="max-h-[60vh] overflow-y-auto pr-2">
+                            <p className="whitespace-pre-wrap text-sm text-muted-foreground">
+                              {query.message}
+                            </p>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
                     </div>
                   </TableCell>
                   <TableCell className="text-sm whitespace-nowrap">
